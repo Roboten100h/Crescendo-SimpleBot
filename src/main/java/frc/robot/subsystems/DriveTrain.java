@@ -4,10 +4,8 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.PWMTalonSRX;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -15,10 +13,10 @@ import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
 
-  private final CANSparkMax m_motorLeftFront = new CANSparkMax(Constants.DriveTrain.motorLeftFrontPort, MotorType.kBrushed);
-  private final CANSparkMax m_motorLeftRear = new CANSparkMax(Constants.DriveTrain.motorLeftRearPort, MotorType.kBrushed);
-  private final CANSparkMax m_motorRightFront = new CANSparkMax(Constants.DriveTrain.motorRightFrontPort, MotorType.kBrushed);
-  private final CANSparkMax m_motorRightRear = new CANSparkMax(Constants.DriveTrain.motorRightRearPort, MotorType.kBrushed);
+  private final PWMTalonSRX m_motorLeftFront = new PWMTalonSRX(Constants.DriveTrain.motorLeftFrontPort);
+  private final PWMTalonSRX m_motorLeftRear = new PWMTalonSRX(Constants.DriveTrain.motorLeftRearPort);
+  private final PWMTalonSRX m_motorRightFront = new PWMTalonSRX(Constants.DriveTrain.motorRightFrontPort);
+  private final PWMTalonSRX m_motorRightRear = new PWMTalonSRX(Constants.DriveTrain.motorRightRearPort);
 
   private final DifferentialDrive m_drive = new DifferentialDrive(m_motorLeftFront, m_motorRightFront);
 
@@ -28,8 +26,8 @@ public class DriveTrain extends SubsystemBase {
   public DriveTrain() {
     m_motorLeftFront.setInverted(true);
 
-    m_motorLeftRear.follow(m_motorLeftFront);
-    m_motorRightRear.follow(m_motorRightRear);
+    m_motorLeftFront.addFollower(m_motorLeftRear);
+    m_motorRightFront.addFollower(m_motorRightRear);
   }
 
   public Command enableSpeedLimiter() {
