@@ -60,9 +60,9 @@ public class RobotContainer {
       .onTrue(Commands.runOnce(() -> m_outtakeSubsystem.startConveyor()))
       .onFalse(Commands.runOnce(() -> m_outtakeSubsystem.stopConveyor()));
 
-    m_driverController.a()
-      .onTrue(Commands.run(() -> m_outtakeSubsystem.setConveyorSpeed(m_driverController.getRightTriggerAxis())))
-      .onFalse(Commands.runOnce(() -> m_outtakeSubsystem.stopConveyor()));
+    // m_driverController.a()
+    //   .onTrue(Commands.run(() -> m_outtakeSubsystem.setConveyorSpeed(m_driverController.getRightTriggerAxis())))
+    //   .onFalse(Commands.runOnce(() -> m_outtakeSubsystem.stopConveyor()));
 
     
     // Start Shooter Roller
